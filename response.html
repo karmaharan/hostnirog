@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-ico" href="{{ url_for('static', filename='logos/favicon.ico') }}">
-    <link rel="icon" type="image/x-ico" href="{{ url_for('static', filename='logos/favicon.ico') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='logos/favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='logos/apple-touch-icon') }}">
+    <link rel="icon" type="image/x-ico" href="{{ url_for('https://ai.techtantra.tech/static', filename='logos/favicon.ico') }}">
+    <link rel="icon" type="image/x-ico" href="{{ url_for('https://ai.techtantra.tech/static', filename='logos/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ url_for('https://ai.techtantra.tech/static', filename='logos/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('https://ai.techtantra.tech/static', filename='logos/apple-touch-icon') }}">
 
     <title>Chat Response</title>
     <style>
@@ -263,7 +263,7 @@ table {
     <div class="wrapper">
         <div class="logo">
             <!-- Insert your logo here -->
-            <img src="{{ url_for('static', filename='logos/Blogo.png') }}" alt="Logo">
+            <img src="{{ url_for('https://ai.techtantra.tech/static', filename='logos/Blogo.png') }}" alt="Logo">
         </div>
         
             
@@ -460,7 +460,7 @@ table {
 
             </table>
             
-            <td><a href="/clear_session" id="clear-session-link">Clear Session</a></td>
+            <td><a href="https://ai.techtantra.tech/clear_session" id="clear-session-link">Clear Session</a></td>
         </div>
 
         <div class="container">
@@ -587,7 +587,7 @@ table {
                 scrollToBottom(); // Scroll to bottom after adding "AI is thinking..."
     
                 $.ajax({
-                    url: '/continue_chat',
+                    url: 'https://ai.techtantra.tech/continue_chat',
                     method: 'POST',
                     data: { user_input: user_input },
                     dataType: 'json',
