@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Information Form</title>
-    <link rel="icon" type="image/x-ico" href="{{ url_for('static', filename='static/favicon.ico') }}">
-    <link rel="icon" type="image/x-ico" href="{{ url_for('static', filename='static/favicon.ico') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='static/favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='static/apple-touch-icon') }}">
+    <link rel="icon" type="image/x-ico" href="static/favicon.ico">
+    <link rel="shortcut icon" href="static/favicon.ico">
+    <link rel="apple-touch-icon" href="static/apple-touch-icon">
 
     <style>
         body {
@@ -17,11 +16,14 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             grid-gap: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #f2f2f2;
         }
 
         .form-group {
@@ -57,23 +59,16 @@
         button[type="submit"]:hover {
             background-color: #45a049;
         }
-        .container {
-    max-width: 1000px; /* Adjust as needed */
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Change auto-fit to auto-fill */
-    grid-gap: 20px;
-    padding: 20px;
-    box-sizing: border-box; /* Ensure padding is included in the width */
-    background-color: #f2f2f2;
-}
-.meal-slot {
+
+        .meal-slot {
             display: flex;
             align-items: center;
         }
+
         .meal-slot input {
             margin-right: 10px;
         }
+
         .add-button {
             cursor: pointer;
             background-color: #007bff;
@@ -84,6 +79,7 @@
             border-radius: 5px;
         }
     </style>
+
     <script>
         function addMealSlot() {
             const container = document.getElementById('meal_slots_container');
@@ -95,278 +91,55 @@
             `;
             container.appendChild(newSlot);
         }
-    </script>
-</head>
-<body>
-    <h1>Health Information Form</h1>
-<div class="container">
-    <form method="POST" action="{{ url_for('https://ai.techtantra.tech/') }}">
-        <div class="form-group">
-            <label for="country">Country:</label>
-            <input type="text" id="country" name="country" required>
-        </div>
-    
-        <div class="form-group">
-            <label for="region">Region:</label>
-            <input type="text" id="region" name="region" required>
-        </div>
 
-        <div class="form-group">
-            <label for="gender">Gender:</label>
-            <select id="gender" name="gender" required>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
-        </div>
-    
-        <div class="form-group">
-            <label for="age">Age:</label>
-            <input type="number" id="age" name="age" min="1" max="120" required>
-        </div>
-    
-        <div class="form-group">
-            <label for="sleep_time">Sleep Time:</label>
-            <input type="time" id="sleep_time" name="sleep_time" value="21:00" required>
-        </div>
-    
-        <div class="form-group">
-            <label for="wake_time">Wake Time:</label>
-            <input type="time" id="wake_time" name="wake_time" value="06:00" required>
-        </div>
-    
-        <div class="form-group">
-            <label for="weight">Weight (kg):</label>
-            <input type="number" id="weight" name="weight" step="0.01" min="0.1" required>
-        </div>
-    
-        <div class="form-group">
-            <label for="height-slider">Height:</label>
-            <input type="range" id="height-slider" name="height-slider" min="48" max="96" value="66" oninput="updateHeightDisplay(this.value)">
-            <span id="height-display">5 feet 6 inches</span>
-            <input type="hidden" id="height_feet" name="height_feet" value="5">
-            <input type="hidden" id="height_inches" name="height_inches" value="6">
-        </div>
+        function updateHeightDisplay(heightInInches) {
+            const feet = Math.floor(heightInInches / 12);
+            const inches = heightInInches % 12;
+            const heightDisplay = document.getElementById('height-display');
+            heightDisplay.textContent = `${feet} feet ${inches} inches`;
 
-        <div class="form-group">
-            <label for="activity_level">Activity Level:</label>
-            <select id="activity_level" name="activity_level" required>
-                <option value="sedentary">Sedentary (little or no exercise)</option>
-                <option value="light">Lightly active (light exercise/sports 1-3 days/week)</option>
-                <option value="moderate">Moderately active (moderate exercise/sports 3-5 days/week)</option>
-                <option value="very_active">Very active (hard exercise/sports 6-7 days a week)</option>
-                <option value="extra_active">Extra active (very hard exercise/sports & physical job or 2x training)</option>
-            </select>
-        </div>
-    
-        <div class="form-group">
-            <label for="goal">Goal:</label>
-            <select id="goal" name="goal" required>
-                <option value="lose_weight">Lose Weight</option>
-                <option value="maintain_weight">Maintain Weight</option>
-                <option value="gain_weight">Gain Weight</option>
-            </select>
-        </div>
-    
-        <div class="form-group">
-            <label for="occupation">Occupation:</label>
-            <input type="text" id="occupation" name="occupation">
-        </div>
-    
-        <div class="form-group">
-            <label for="specific_diet">Specific Diet:</label>
-            <input type="text" id="specific_diet" name="specific_diet">
-        </div>
-    
-        <div class="form-group">
-            <label for="alcohol_consumption">Alcohol Consumption:</label>
-            <input type="text" id="alcohol_consumption" name="alcohol_consumption">
-        </div>
-    
-        <div class="form-group">
-            <label for="smoker">Smoker:</label>
-            <input type="text" id="smoker" name="smoker">
-        </div>
-    
-        <div class="form-group">
-            <label for="meal_times">Meal Times:</label>
-            <div id="meal_slots_container">
-                <div class="meal-slot">
-                    <input type="text" name="meal_names" value="Breakfast" readonly>
-                    <input type="time" name="meal_times" value="08:00">
-                </div>
-                <div class="meal-slot">
-                    <input type="text" name="meal_names" value="Lunch" readonly>
-                    <input type="time" name="meal_times" value="12:00">
-                </div>
-                <div class="meal-slot">
-                    <input type="text" name="meal_names" value="Dinner" readonly>
-                    <input type="time" name="meal_times" value="18:00">
-                </div>
-            </div>
-            <button type="button" class="add-button" onclick="addMealSlot()">+</button>
-        </div>
-    
-        <div class="form-group">
-            <label for="food_allergies">Food Allergies:</label>
-            <input type="text" id="food_allergies" name="food_allergies">
-        </div>
-    
-        <div class="form-group">
-            <label for="eat_out_frequency">Eat Out Frequency:</label>
-            <input type="text" id="eat_out_frequency" name="eat_out_frequency">
-        </div>
-    
-        <div class="form-group">
-            <label for="exercise">Exercise:</label>
-            <input type="text" id="exercise" name="exercise">
-        </div>
-    
-        <div class="form-group">
-            <label for="health_conditions">Health Conditions:</label>
-            <input type="text" id="health_conditions" name="health_conditions">
-        </div>
-    
-        <div class="form-group">
-            <label for="dietary_goals">Dietary Goals:</label>
-            <input type="text" id="dietary_goals" name="dietary_goals">
-        </div>
-    
-        <div class="form-group">
-            <label for="favorite_foods">Favorite Foods:</label>
-            <input type="text" id="favorite_foods" name="favorite_foods">
-        </div>
-    
-        <div class="form-group">
-            <label for="eating_pace">Eating Pace:</label>
-            <input type="text" id="eating_pace" name="eating_pace">
-        </div>
-    
-        <div class="form-group">
-            <label for="cooking_frequency">Cooking Frequency:</label>
-            <input type="text" id="cooking_frequency" name="cooking_frequency">
-        </div>
-    
-        <div class="form-group">
-            <label for="nutrient_targets">Nutrient Targets:</label>
-            <input type="text" id="nutrient_targets" name="nutrient_targets">
-        </div>
-    
-        <div class="form-group">
-            <label for="daily_routine">Daily Routine:</label>
-            <input type="text" id="daily_routine" name="daily_routine">
-        </div>
-    
-        <div class="form-group">
-            <label for="travel_frequency">Travel Frequency:</label>
-            <input type="text" id="travel_frequency" name="travel_frequency">
-        </div>
-    
-        <div class="form-group">
-            <label for="stressors_triggers">Stressors/Triggers:</label>
-            <input type="text" id="stressors_triggers" name="stressors_triggers">
-        </div>
-    
-        <div class="form-group">
-            <label for="health_motivation">Health Motivation:</label>
-            <input type="text" id="health_motivation" name="health_motivation">
-        </div>
-    
-        <div class="form-group">
-            <label for="negative_effects">Negative Effects:</label>
-            <input type="text" id="negative_effects" name="negative_effects">
-        </div>
-    
-        <div class="form-group">
-            <label for="health_concerns">Health Concerns:</label>
-            <input type="text" id="health_concerns" name="health_concerns">
-        </div>
-    
-        <div class="form-group">
-            <label for="social_eating_style">Social Eating Style:</label>
-            <input type="text" id="social_eating_style" name="social_eating_style">
-        </div>
-    
-        <div class="form-group">
-            <label for="hydration_method">Hydration Method:</label>
-            <input type="text" id="hydration_method" name="hydration_method">
-        </div>
-    
-        <div class="form-group">
-            <label for="meal_prep_method">Meal Prep Method:</label>
-            <input type="text" id="meal_prep_method" name="meal_prep_method">
-        </div>
-    
-        <div class="form-group">
-            <label for="dietary_restrictions">Dietary Restrictions:</label>
-            <input type="text" id="dietary_restrictions" name="dietary_restrictions">
-        </div>
-            <!-- Additional form fields -->
-            <div class="form-group">
-                <label>
-                    
-                    By agreeing, you allow us to use your data for personalize AI responses and train our AI model.
-                </label>
-            </div>
+            // Update hidden input fields
+            document.getElementById('height_feet').value = feet;
+            document.getElementById('height_inches').value = inches;
+        }
 
-            <button type="button" id="nextBtn" onclick="nextStep()">Next</button>
-
-        
-            <!-- Submit button -->
-            <div id="submitBtn" style="display: none;">
-                <button type="submit">Submit</button>
-            </div>
-        </form>
-    </div>
-</div>
-<script>
-function updateHeightDisplay(heightInInches) {
-    const feet = Math.floor(heightInInches / 12);
-    const inches = heightInInches % 12;
-    const heightDisplay = document.getElementById('height-display');
-    heightDisplay.textContent = `${feet} feet ${inches} inches`;
-
-    // Update hidden input fields
-    document.getElementById('height_feet').value = feet;
-    document.getElementById('height_inches').value = inches;
-}
-</script>
-    <script>
         let currentStep = 0;
-        const formGroups = document.querySelectorAll('.form-group');
-        const submitBtn = document.getElementById('submitBtn');
-        const nextBtn = document.getElementById('nextBtn'); // Corrected targeting of Next button
+        let formGroups;
+        let submitBtn;
+        let nextBtn;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            formGroups = document.querySelectorAll('.form-group');
+            submitBtn = document.getElementById('submitBtn');
+            nextBtn = document.getElementById('nextBtn');
+            showStep(currentStep);
+        });
 
         function showStep(step) {
             const startIndex = step * 3;
             const endIndex = Math.min(startIndex + 3, formGroups.length);
             formGroups.forEach((group, index) => {
-                if (index >= startIndex && index < endIndex) {
-                    group.style.display = 'block';
-                } else {
-                    group.style.display = 'none';
-                }
+                group.style.display = (index >= startIndex && index < endIndex) ? 'block' : 'none';
             });
         }
 
-
-    function validateStep() {
-        const startIndex = currentStep * 3;
-        const endIndex = Math.min(startIndex + 3, formGroups.length);
-        let isValid = true;
-        for (let i = startIndex; i < endIndex; i++) {
-            const fields = formGroups[i].querySelectorAll('input, select');
-            fields.forEach(field => {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.style.border = '1px solid red';
-                }
-            });
+        function validateStep() {
+            const startIndex = currentStep * 3;
+            const endIndex = Math.min(startIndex + 3, formGroups.length);
+            let isValid = true;
+            for (let i = startIndex; i < endIndex; i++) {
+                const fields = formGroups[i].querySelectorAll('input, select');
+                fields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.style.border = '1px solid red';
+                    } else {
+                        field.style.border = '';
+                    }
+                });
+            }
+            return isValid;
         }
-        return isValid;
-    }
-
-
 
         function nextStep() {
             if (validateStep()) {
@@ -381,11 +154,7 @@ function updateHeightDisplay(heightInInches) {
             }
         }
 
-        // Show the first step initially
-        showStep(currentStep);
-    </script>
-    <script>
-        document.querySelector('form').onsubmit = function(event) {
+        function validateForm(event) {
             const formGroups = document.querySelectorAll('.form-group');
             let isValid = true;
             formGroups.forEach(group => {
@@ -400,32 +169,107 @@ function updateHeightDisplay(heightInInches) {
             if (!isValid) {
                 event.preventDefault();
             }
-        };
-    </script>
-    <script>
-        function submitForm() {
-            const form = document.getElementById('userDataForm');
-
-
-            // For example, you can use fetch API to send the form data to backend
-            fetch('/submit', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Handle successful form submission
-                    console.log('Form submitted successfully');
-                } else {
-                    // Handle errors
-                    console.error('Error submitting form');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
         }
     </script>
-    
+</head>
+<body>
+    <h1>Health Information Form</h1>
+    <div class="container">
+        <form method="POST" action="https://ai.techtantra.tech/" onsubmit="validateForm(event)">
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" id="country" name="country" required>
+            </div>
+
+            <div class="form-group">
+                <label for="region">Region:</label>
+                <input type="text" id="region" name="region" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="1" max="120" required>
+            </div>
+
+            <div class="form-group">
+                <label for="sleep_time">Sleep Time:</label>
+                <input type="time" id="sleep_time" name="sleep_time" value="21:00" required>
+            </div>
+
+            <div class="form-group">
+                <label for="wake_time">Wake Time:</label>
+                <input type="time" id="wake_time" name="wake_time" value="06:00" required>
+            </div>
+
+            <div class="form-group">
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" name="weight" step="0.01" min="0.1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="height-slider">Height:</label>
+                <input type="range" id="height-slider" name="height-slider" min="48" max="96" value="66" oninput="updateHeightDisplay(this.value)">
+                <span id="height-display">5 feet 6 inches</span>
+                <input type="hidden" id="height_feet" name="height_feet" value="5">
+                <input type="hidden" id="height_inches" name="height_inches" value="6">
+            </div>
+
+            <div class="form-group">
+                <label for="activity_level">Activity Level:</label>
+                <select id="activity_level" name="activity_level" required>
+                    <option value="sedentary">Sedentary (little or no exercise)</option>
+                    <option value="light">Lightly active (light exercise/sports 1-3 days/week)</option>
+                    <option value="moderate">Moderately active (moderate exercise/sports 3-5 days/week)</option>
+                    <option value="very_active">Very active (hard exercise/sports 6-7 days a week)</option>
+                    <option value="extra_active">Extra active (very hard exercise/sports & physical job or 2x training)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="goal">Goal:</label>
+                <select id="goal" name="goal" required>
+                    <option value="maintain">Maintain weight</option>
+                    <option value="lose">Lose weight</option>
+                    <option value="gain">Gain weight</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="dietary_preference">Dietary Preference:</label>
+                <select id="dietary_preference" name="dietary_preference" required>
+                    <option value="none">None</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="keto">Keto</option>
+                    <option value="paleo">Paleo</option>
+                    <option value="low_carb">Low Carb</option>
+                    <option value="mediterranean">Mediterranean</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="meals">Meals:</label>
+                <div id="meal_slots_container">
+                    <div class="meal-slot">
+                        <input type="text" name="meal_names" placeholder="Meal name">
+                        <input type="time" name="meal_times">
+                    </div>
+                </div>
+                <button type="button" class="add-button" onclick="addMealSlot()">Add Meal Slot</button>
+            </div>
+
+            <button type="button" id="nextBtn" onclick="nextStep()">Next</button>
+            <button type="submit" id="submitBtn" style="display:none">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
